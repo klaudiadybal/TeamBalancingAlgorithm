@@ -7,11 +7,11 @@ public class Team {
 
     List<String> individuals;
 
-    float teamSkill;
+    Double teamSkill;
 
     public Team() {
         individuals = new ArrayList<>();
-        teamSkill = 0;
+        teamSkill = 0.0;
     }
 
     public List<String> getIndividuals() {
@@ -22,11 +22,11 @@ public class Team {
         this.individuals = individuals;
     }
 
-    public float getTeamSkill() {
+    public Double getTeamSkill() {
         return teamSkill;
     }
 
-    public void setTeamSkill(float teamSkill) {
+    public void setTeamSkill(Double teamSkill) {
         this.teamSkill = teamSkill;
     }
 }
