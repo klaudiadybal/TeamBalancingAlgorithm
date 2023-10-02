@@ -1,9 +1,6 @@
 package teambalancer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TeamBalancer {
 
@@ -22,6 +19,8 @@ public class TeamBalancer {
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
 
         List<String> individualsNames = new ArrayList<>(individuals.keySet());
+
+        Collections.sort(individualsNames, (a, b) -> (int) (individuals.get(b) - individuals.get(a)));
 
         List<Team> teams = getTeams(numberOfTeams, individualsNames);
 

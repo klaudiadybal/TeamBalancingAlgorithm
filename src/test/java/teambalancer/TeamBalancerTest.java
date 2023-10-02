@@ -128,6 +128,25 @@ class TeamBalancerTest {
         assertThat(teams.size()).isEqualTo(5);
     }
 
+    @Test
+    public void shouldBalanceTeamsAppropriately() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.get(0).getTeamSkill() / 2).isEqualTo(6.0);
+        assertThat(teams.get(1).getTeamSkill() / 2).isEqualTo(6.5);
+        assertThat(teams.get(2).getTeamSkill() / 2).isEqualTo(5.5);
+    }
+
 
 
 }
