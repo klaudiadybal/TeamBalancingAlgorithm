@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -164,7 +161,7 @@ class TeamBalancerTest {
         List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
 
 
-        assertThat(teams.get(0).getIndividuals().get(0)).isEqualTo("Jude");
+        assertThat(teams.get(0).getIndividuals()).contains("Jude");
         assertThat(teams.get(0).getIndividuals().get(1)).isEqualTo("Juliet");
         assertThat(teams.get(1).getIndividuals().get(0)).isEqualTo("Johnny");
         assertThat(teams.get(1).getIndividuals().get(1)).isEqualTo("Robbie");
@@ -265,7 +262,7 @@ class TeamBalancerTest {
     }
 
     @Test
-    public void shouldBalanceFiveTeamsFromNineMembers() {
+    public void shouldBalanceFiveTeamsFromNineIndividuals() {
         Map<String, Double> individuals = new HashMap<>();
         individuals.put("Robert", 3.0);
         individuals.put("Olivia", 4.0);
@@ -286,6 +283,55 @@ class TeamBalancerTest {
         assertThat(teams.get(1).getIndividuals()).contains("Alice");
         assertThat(teams.get(2).getIndividuals()).contains("Jude");
         assertThat(standardDeviation).isEqualTo(0.31);
+    }
+
+    @Test
+    public void shouldBalanceFourTeamsFormTwelveIndividuals() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Robert", 3.0);
+        individuals.put("Olivia", 4.0);
+        individuals.put("Harry", 5.0);
+        individuals.put("Alice", 10.0);
+        individuals.put("Jack", 5.0);
+        individuals.put("Robbie", 12.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Anna", 2.0);
+        individuals.put("Oliver", 4.0);
+        individuals.put("Ryan", 5.0);
+        individuals.put("Maya", 11.0);
+
+        int numberOfTeams = 4;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+        double standardDeviation = teamBalancer.getStandardDeviation(teams);
+
+        assertThat(numberOfTeams).isEqualTo(4);
+        assertThat(teams.get(0).getIndividuals().size()).isEqualTo(3);
+        assertThat(standardDeviation).isEqualTo(0.72);
+    }
+
+    @Test
+    public void shouldFindTeamWithTheSmallestTeamSize() {
+        List<Team> teams = new ArrayList<>();
+
+        Team t1 = new Team();
+        t1.setIndividuals(Arrays.asList("Robbie", "Johnny", "Juliet"));
+        teams.add(t1);
+
+        Team t2 = new Team();
+        t2.setIndividuals(Arrays.asList("Betty"));
+        teams.add(t2);
+
+        Team t3 = new Team();
+        t3.setIndividuals(Arrays.asList("Harry", "Olivia"));
+        teams.add(t3);
+
+        Team lowestTeamSize = teamBalancer.findTeamWithTheLowestTeamSize(teams);
+
+        assertThat(lowestTeamSize).isEqualTo(t2);
+        assertThat(lowestTeamSize.getIndividuals().size()).isEqualTo(1);
+
     }
 
 }

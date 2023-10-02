@@ -10,6 +10,17 @@ public class TeamBalancer {
         return teamQueue.poll();
     }
 
+    Team findTeamWithTheLowestTeamSize(List<Team> teams) {
+        Team lowestTeamSize = teams.get(0);
+
+        for(Team team : teams) {
+            if(team.getIndividuals().size() < lowestTeamSize.getIndividuals().size()) {
+                lowestTeamSize = team;
+            }
+        }
+        return lowestTeamSize;
+    }
+
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
 
         if(numberOfTeams > individuals.size() || numberOfTeams == 0) {
@@ -22,11 +33,20 @@ public class TeamBalancer {
 
         List<Team> teams = getTeams(numberOfTeams, individualsNames);
 
-        for(String individualName : individualsNames) {
-            Team lowest = findTeamWithTheLowestTeamSkill(teams);
-            lowest.getIndividuals().add(individualName);
-            Double teamSkill = lowest.getTeamSkill();
-            lowest.setTeamSkill(teamSkill + individuals.get(individualName));
+
+        for (String individualsName : individualsNames) {
+            Team lowestTeamSkill = findTeamWithTheLowestTeamSkill(teams);
+            Team lowestTeamSize = findTeamWithTheLowestTeamSize(teams);
+
+            if (lowestTeamSkill.getIndividuals().size() > lowestTeamSize.getIndividuals().size()) {
+                lowestTeamSize.getIndividuals().add(individualsName);
+                Double teamSkill = lowestTeamSize.getTeamSkill();
+                lowestTeamSize.setTeamSkill(teamSkill + individuals.get(individualsName));
+            } else {
+                lowestTeamSkill.getIndividuals().add(individualsName);
+                Double teamSkill = lowestTeamSkill.getTeamSkill();
+                lowestTeamSkill.setTeamSkill(teamSkill + individuals.get(individualsName));
+            }
         }
 
         printTeams(teams);
@@ -50,9 +70,10 @@ public class TeamBalancer {
     }
 
     int getCustomNumberOfTeams(int numberOfTeams, List<String> individualsNames) {
+        int size = individualsNames.size();
 
-        for(int i = 2; i <= individualsNames.size(); i++) {
-            if(individualsNames.size() % i == 0) {
+        for(int i = 2; i <= size; i++) {
+            if(size % i == 0) {
                 numberOfTeams = i;
                 break;
             }
@@ -66,29 +87,36 @@ public class TeamBalancer {
 
         double standardDeviation = getStandardDeviation(teams);
 
+        int teamSize = teams.get(0).getIndividuals().size();
+        StringBuilder stringBuilder = new StringBuilder();
+
+
         for(int i = 0; i < teams.size(); i++) {
             String individuals = teams.get(i).getIndividuals().toString();
-            System.out.format(Locale.US, "Team no %d has %d players(%s). Average rate: %.1f\n", i+1,
-                    teams.get(i).getIndividuals().size(),
-                    individuals.substring(1, individuals.length() - 1),
-                    teams.get(i).getTeamSkill() / teams.get(i).getIndividuals().size());
+            stringBuilder.append("Team no ").append(i + 1).append(" has ").append(teamSize).append(" players(").append(individuals, 1, individuals.length() - 1)
+                .append("). Average rate: ").append(teams.get(i).getTeamSkill() / teamSize).append("\n");
         }
 
-        System.out.print("Teams rate standard deviation: " + standardDeviation + "\n");
+        stringBuilder.append("Teams rate standard deviation: ").append(standardDeviation).append("\n");
+        System.out.print(stringBuilder);
     }
 
     double getStandardDeviation(List<Team> teams) {
         double totalSkill = 0;
-        for (Team team : teams) {
-            totalSkill += team.getTeamSkill() / team.getIndividuals().size();
-        }
-        double averageSkill = totalSkill / teams.size();
+        int teamSize = teams.get(0).getIndividuals().size();
+        int teamsSize = teams.size();
 
-        double squaredDifferencesSum = 0;
         for (Team team : teams) {
-            squaredDifferencesSum += (team.getTeamSkill() / team.getIndividuals().size() - averageSkill) * (team.getTeamSkill() / team.getIndividuals().size() - averageSkill);
+            totalSkill += team.getTeamSkill() / teamSize;
         }
-        double variance = squaredDifferencesSum / teams.size();
+
+        double averageSkill = totalSkill / teamsSize;
+        double squaredDifferencesSum = 0;
+
+        for (Team team : teams) {
+            squaredDifferencesSum += (team.getTeamSkill() / teamSize - averageSkill) * (team.getTeamSkill() / teamSize - averageSkill);
+        }
+        double variance = squaredDifferencesSum / teamsSize;
 
         double standardDeviation = Math.sqrt(variance);
         return Math.round(standardDeviation * 100.0) / 100.0;
