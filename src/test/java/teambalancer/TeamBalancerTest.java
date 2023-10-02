@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
 
 class TeamBalancerTest {
@@ -108,7 +109,7 @@ class TeamBalancerTest {
     }
 
     @Test
-    public void shouldCreateFiveTeamsWithTwoIndividuals(){
+    public void shouldHandleIndivisibleNumberOfIndividuals(){
         Map<String, Double> individuals = new HashMap<>();
         individuals.put("Robert", 1.0);
         individuals.put("Olivia", 5.0);
@@ -147,6 +148,40 @@ class TeamBalancerTest {
         assertThat(teams.get(2).getTeamSkill() / 2).isEqualTo(5.5);
     }
 
+    @Test
+    public void shouldAssignCorrectIndividualsToTeams(){
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
 
 
+        assertThat(teams.get(0).getIndividuals().get(0)).isEqualTo("Jude");
+        assertThat(teams.get(0).getIndividuals().get(1)).isEqualTo("Juliet");
+        assertThat(teams.get(1).getIndividuals().get(0)).isEqualTo("Johnny");
+        assertThat(teams.get(1).getIndividuals().get(1)).isEqualTo("Robbie");
+        assertThat(teams.get(2).getIndividuals().get(0)).isEqualTo("Deborah");
+        assertThat(teams.get(2).getIndividuals().get(1)).isEqualTo("Scarlet");
+    }
+
+    @Test
+    public void shouldReturnEmptyListIfNumberOfTeamsIsGreaterThanNumberOfIndividuals(){
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.size()).isEqualTo(0);
+        assertThat(teams).isEmpty();
+    }
 }

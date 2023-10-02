@@ -18,9 +18,13 @@ public class TeamBalancer {
 
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
 
+        if(numberOfTeams > individuals.size()) {
+            return new ArrayList<>();
+        }
+
         List<String> individualsNames = new ArrayList<>(individuals.keySet());
 
-        Collections.sort(individualsNames, (a, b) -> (int) (individuals.get(b) - individuals.get(a)));
+        individualsNames.sort((a, b) -> (int) (individuals.get(b) - individuals.get(a)));
 
         List<Team> teams = getTeams(numberOfTeams, individualsNames);
 
@@ -35,6 +39,7 @@ public class TeamBalancer {
     }
 
     private List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
+
         if(individualsNames.size() % numberOfTeams != 0) {
             numberOfTeams = getCustomNumberOfTeams(numberOfTeams, individualsNames);
         }
