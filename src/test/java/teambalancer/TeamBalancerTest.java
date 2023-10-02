@@ -2,13 +2,14 @@ package teambalancer;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 
 class TeamBalancerTest {
@@ -183,5 +184,34 @@ class TeamBalancerTest {
 
         assertThat(teams.size()).isEqualTo(0);
         assertThat(teams).isEmpty();
+    }
+
+    @Test
+    public void shouldPrintTeamsInTheConsole() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        teamBalancer.printTeams(teams);
+        String expectedOutput = """
+                Team no 1 has 2 players(Jude, Juliet). Average rate: 6.0
+                Team no 2 has 2 players(Johnny, Robbie). Average rate: 6.5
+                Team no 3 has 2 players(Deborah, Scarlet). Average rate: 5.5
+                """;
+
+        assertThat(outContent.toString()).isEqualTo(expectedOutput);
+
+        System.setOut(System.out);
     }
 }
