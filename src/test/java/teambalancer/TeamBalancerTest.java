@@ -57,7 +57,7 @@ class TeamBalancerTest {
     }
 
     @Test
-    public void shouldCreateThreeTeamsWithOneIndividual() {
+    public void shouldReturnCorrectNumberOfTeams() {
         Map<String, Double> individuals = new HashMap<>();
         individuals.put("Jude", 6.5);
         individuals.put("Johnny", 6.0);
@@ -70,4 +70,26 @@ class TeamBalancerTest {
         assertThat(teams.size()).isEqualTo(3);
 
     }
+
+    @Test
+    public void shouldReturnTeamsWithCorrectSize() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.get(0).getIndividuals().size()).isEqualTo(2);
+        assertThat(teams.get(1).getIndividuals().size()).isEqualTo(2);
+        assertThat(teams.get(2).getIndividuals().size()).isEqualTo(2);
+    }
+
+
+
 }
