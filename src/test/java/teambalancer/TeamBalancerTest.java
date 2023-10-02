@@ -127,7 +127,7 @@ class TeamBalancerTest {
 
         List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
 
-        assertThat(teams.size()).isEqualTo(5);
+        assertThat(teams.size()).isEqualTo(2);
     }
 
     @Test
@@ -208,7 +208,8 @@ class TeamBalancerTest {
                 Team no 1 has 2 players(Jude, Juliet). Average rate: 6.0
                 Team no 2 has 2 players(Johnny, Robbie). Average rate: 6.5
                 Team no 3 has 2 players(Deborah, Scarlet). Average rate: 5.5
-                Teams rate standard deviation: 0.41""";
+                Teams rate standard deviation: 0.41
+                """;
 
         assertThat(outContent.toString()).isEqualTo(expectedOutput);
 
@@ -235,6 +236,56 @@ class TeamBalancerTest {
         assertThat(teams.size()).isEqualTo(7);
         assertThat(standardDeviation).isEqualTo(2.36);
 
+    }
+
+    @Test
+    public void shouldNotFailIfNumberOfTeamsEqualsZero(){
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 8.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 0;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldNotFailIfNumberOfIndividualsEqualsZero() {
+        Map<String, Double> individuals = new HashMap<>();
+        int numberOfTeams = 5;
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldBalanceFiveTeamsFromNineMembers() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Robert", 3.0);
+        individuals.put("Olivia", 4.0);
+        individuals.put("Harry", 5.0);
+        individuals.put("Alice", 10.0);
+        individuals.put("Jack", 5.0);
+        individuals.put("Robbie", 12.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+
+        int numberOfTeams = 5;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+        double standardDeviation = teamBalancer.getStandardDeviation(teams);
+
+        assertThat(teams.get(0).getIndividuals()).contains("Robbie");
+        assertThat(teams.get(1).getIndividuals()).contains("Alice");
+        assertThat(teams.get(2).getIndividuals()).contains("Jude");
+        assertThat(standardDeviation).isEqualTo(0.31);
     }
 
 }

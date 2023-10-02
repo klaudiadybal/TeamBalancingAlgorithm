@@ -4,20 +4,15 @@ import java.util.*;
 
 public class TeamBalancer {
 
-    public Team findTeamWithTheLowestTeamSkill(List<Team> teams) {
-        Team lowest = teams.get(0);
-        for(Team team : teams){
-            if(team.getTeamSkill() < lowest.getTeamSkill()){
-                lowest = team;
-            }
-        }
-
-        return lowest;
+    Team findTeamWithTheLowestTeamSkill(List<Team> teams) {
+        PriorityQueue<Team> teamQueue = new PriorityQueue<>(Comparator.comparingDouble(Team::getTeamSkill));
+        teamQueue.addAll(teams);
+        return teamQueue.poll();
     }
 
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
 
-        if(numberOfTeams > individuals.size()) {
+        if(numberOfTeams > individuals.size() || numberOfTeams == 0) {
             return new ArrayList<>();
         }
 
@@ -41,7 +36,7 @@ public class TeamBalancer {
 
 
 
-    private List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
+    List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
 
         if(individualsNames.size() % numberOfTeams != 0) {
             numberOfTeams = getCustomNumberOfTeams(numberOfTeams, individualsNames);
@@ -54,34 +49,35 @@ public class TeamBalancer {
         return teams;
     }
 
-    private int getCustomNumberOfTeams(int numberOfTeams, List<String> individualsNames) {
-        numberOfTeams = Math.max(numberOfTeams, 2);
+    int getCustomNumberOfTeams(int numberOfTeams, List<String> individualsNames) {
 
-        int individualsPerTeam = individualsNames.size() / numberOfTeams;
-
-        while (numberOfTeams * individualsPerTeam < individualsNames.size()) {
-            numberOfTeams++;
-            individualsPerTeam = individualsNames.size() / numberOfTeams;
+        for(int i = 2; i <= individualsNames.size(); i++) {
+            if(individualsNames.size() % i == 0) {
+                numberOfTeams = i;
+                break;
+            }
         }
 
         return numberOfTeams;
     }
 
 
-    public void printTeams(List<Team> teams) {
+    void printTeams(List<Team> teams) {
 
         double standardDeviation = getStandardDeviation(teams);
 
         for(int i = 0; i < teams.size(); i++) {
             String individuals = teams.get(i).getIndividuals().toString();
-            System.out.print("Team no " + (i + 1) + " has " + teams.get(i).getIndividuals().size() + " players(" +
-                    individuals.substring(1, individuals.length() - 1) + "). Average rate: " +
-                    teams.get(i).getTeamSkill() / teams.get(i).getIndividuals().size() + "\n");
+            System.out.format(Locale.US, "Team no %d has %d players(%s). Average rate: %.1f\n", i+1,
+                    teams.get(i).getIndividuals().size(),
+                    individuals.substring(1, individuals.length() - 1),
+                    teams.get(i).getTeamSkill() / teams.get(i).getIndividuals().size());
         }
-        System.out.print("Teams rate standard deviation: " + standardDeviation);
+
+        System.out.print("Teams rate standard deviation: " + standardDeviation + "\n");
     }
 
-    public double getStandardDeviation(List<Team> teams) {
+    double getStandardDeviation(List<Team> teams) {
         double totalSkill = 0;
         for (Team team : teams) {
             totalSkill += team.getTeamSkill() / team.getIndividuals().size();
