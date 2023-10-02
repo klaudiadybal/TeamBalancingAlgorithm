@@ -39,6 +39,8 @@ public class TeamBalancer {
         return teams;
     }
 
+
+
     private List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
 
         if(individualsNames.size() % numberOfTeams != 0) {
@@ -67,11 +69,33 @@ public class TeamBalancer {
 
 
     public void printTeams(List<Team> teams) {
+
+        double standardDeviation = getStandardDeviation(teams);
+
         for(int i = 0; i < teams.size(); i++) {
             String individuals = teams.get(i).getIndividuals().toString();
             System.out.print("Team no " + (i + 1) + " has " + teams.get(i).getIndividuals().size() + " players(" +
-                    individuals.substring(1, individuals.length() - 1) + "). Average rate: " + teams.get(i).getTeamSkill() / 2 + "\n");
+                    individuals.substring(1, individuals.length() - 1) + "). Average rate: " +
+                    teams.get(i).getTeamSkill() / teams.get(i).getIndividuals().size() + "\n");
         }
+        System.out.print("Teams rate standard deviation: " + standardDeviation);
+    }
+
+    public double getStandardDeviation(List<Team> teams) {
+        double totalSkill = 0;
+        for (Team team : teams) {
+            totalSkill += team.getTeamSkill() / team.getIndividuals().size();
+        }
+        double averageSkill = totalSkill / teams.size();
+
+        double squaredDifferencesSum = 0;
+        for (Team team : teams) {
+            squaredDifferencesSum += (team.getTeamSkill() / team.getIndividuals().size() - averageSkill) * (team.getTeamSkill() / team.getIndividuals().size() - averageSkill);
+        }
+        double variance = squaredDifferencesSum / teams.size();
+
+        double standardDeviation = Math.sqrt(variance);
+        return Math.round(standardDeviation * 100.0) / 100.0;
     }
 
 }

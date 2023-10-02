@@ -208,10 +208,33 @@ class TeamBalancerTest {
                 Team no 1 has 2 players(Jude, Juliet). Average rate: 6.0
                 Team no 2 has 2 players(Johnny, Robbie). Average rate: 6.5
                 Team no 3 has 2 players(Deborah, Scarlet). Average rate: 5.5
-                """;
+                Teams rate standard deviation: 0.41""";
 
         assertThat(outContent.toString()).isEqualTo(expectedOutput);
 
         System.setOut(System.out);
     }
+
+    @Test
+    public void shouldCalculateTeamStandardDeviation() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 3.0);
+        individuals.put("Robbie", 4.0);
+        individuals.put("Juliet", 5.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 10.0);
+        individuals.put("Deborah", 5.0);
+        individuals.put("Tom", 2.0);
+
+        int numberOfTeams = 4;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        double standardDeviation = teamBalancer.getStandardDeviation(teams);
+
+        assertThat(teams.size()).isEqualTo(7);
+        assertThat(standardDeviation).isEqualTo(2.36);
+
+    }
+
 }
