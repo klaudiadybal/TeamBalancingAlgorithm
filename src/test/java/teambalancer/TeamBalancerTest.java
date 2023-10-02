@@ -90,6 +90,44 @@ class TeamBalancerTest {
         assertThat(teams.get(2).getIndividuals().size()).isEqualTo(2);
     }
 
+    @Test
+    public void shouldCreateTeamsWithEqualNumbersOfIndividuals() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Robert", 1.0);
+        individuals.put("Olivia", 5.0);
+        individuals.put("Harry", 4.0);
+        individuals.put("Alice", 6.0);
+        individuals.put("Jack", 5.0);
+
+        int numberOfTeams = 4;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.size()).isEqualTo(5);
+
+    }
+
+    @Test
+    public void shouldCreateFiveTeamsWithTwoIndividuals(){
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Robert", 1.0);
+        individuals.put("Olivia", 5.0);
+        individuals.put("Harry", 4.0);
+        individuals.put("Alice", 6.0);
+        individuals.put("Jack", 5.0);
+        individuals.put("Robbie", 5.0);
+        individuals.put("Juliet", 3.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 9.0);
+        individuals.put("Deborah", 6.0);
+
+        int numberOfTeams = 3;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        assertThat(teams.size()).isEqualTo(5);
+    }
+
 
 
 }

@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Initial commit.">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Implementation of division into teams of equal size.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" afterDir="false" />
@@ -19,6 +18,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,7 +94,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamBalancerTest.shouldBalanceThreeTeamsWhenBalancingSixIndividuals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamBalancerTest.shouldCreateFiveTeamsWithTwoIndividuals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -91,7 +107,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldBalanceThreeTeamsWhenBalancingSixIndividuals&quot;" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldCreateFiveTeamsWithTwoIndividuals&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -102,7 +118,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamBalancerTest.shouldReturnTeamsWithCorrectSize" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamBalancerTest.shouldCreateTwoTeamsWithFiveIndividuals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -115,7 +131,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldReturnTeamsWithCorrectSize&quot;" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldCreateTwoTeamsWithFiveIndividuals&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSkill" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSkill&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -129,9 +169,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TeamBalancerTest" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldReturnTeamsWithCorrectSize" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldBalanceThreeTeamsWhenBalancingSixIndividuals" />
         <item itemvalue="Application.TeamBalancer" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSkill" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldCreateFiveTeamsWithTwoIndividuals" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldCreateTwoTeamsWithFiveIndividuals" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696092276091</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implementation of division into teams of equal size.">
+      <option name="closed" value="true" />
+      <created>1696233706181</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696233706181</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,6 +229,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit." />
+    <MESSAGE value="Implementation of division into teams of equal size." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementation of division into teams of equal size." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java</url>
+          <line>73</line>
+          <properties class="teambalancer.TeamBalancer">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

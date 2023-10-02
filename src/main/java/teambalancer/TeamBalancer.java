@@ -1,8 +1,12 @@
 package teambalancer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TeamBalancer {
+
 
     public Team findTeamWithTheLowestTeamSkill(List<Team> teams) {
         Team lowest = teams.get(0);
@@ -17,13 +21,9 @@ public class TeamBalancer {
 
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
 
-        List<Team> teams = new ArrayList<>();
-
-        for(int i = 0; i < numberOfTeams; i++) {
-            teams.add(new Team());
-        }
-
         List<String> individualsNames = new ArrayList<>(individuals.keySet());
+
+        List<Team> teams = getTeams(numberOfTeams, individualsNames);
 
         for(String individualName : individualsNames) {
             Team lowest = findTeamWithTheLowestTeamSkill(teams);
@@ -34,6 +34,32 @@ public class TeamBalancer {
 
         return teams;
     }
+
+    private List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
+        if(individualsNames.size() % numberOfTeams != 0) {
+            numberOfTeams = getCustomNumberOfTeams(numberOfTeams, individualsNames);
+        }
+
+        List<Team> teams = new ArrayList<>();
+        for(int i = 0; i < numberOfTeams; i++) {
+            teams.add(new Team());
+        }
+        return teams;
+    }
+
+    private int getCustomNumberOfTeams(int numberOfTeams, List<String> individualsNames) {
+        numberOfTeams = Math.max(numberOfTeams, 2);
+
+        int individualsPerTeam = individualsNames.size() / numberOfTeams;
+
+        while (numberOfTeams * individualsPerTeam < individualsNames.size()) {
+            numberOfTeams++;
+            individualsPerTeam = individualsNames.size() / numberOfTeams;
+        }
+
+        return numberOfTeams;
+    }
+
 
 //    private void showTeams(List<Team> teams) {
 //        for(int i = 0; i < teams.size(); i++) {
