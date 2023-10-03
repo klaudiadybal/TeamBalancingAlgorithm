@@ -11,24 +11,35 @@ The algorithm adjusts the number of teams if the total number of players is not 
 
 ## How to run tests
 
+You can run the tests using Gradle from the command line, as described below.
+Alternatively, you can also perform these actions using an Integrated Development Environment (IDE) of your choice.
+
+### Using Command Line (Gradle):
+
 **1. Clone the repository (or unpack ZIP file):**
 
 `git clone <https://github.com/klaudiadybal/TeamBalancingAlgorithm.git>
-cd team_balancer`
+cd TeamBalancingAlgorithm`
 
-**2. Open created folder in terminal, compile and run test using Gradle**
+**2. Open created folder in terminal, compile and run test using Gradle:**
 
 `gradle test`
 
 This command compiles the code and runs all the unit tests. The test results will be displayed in the terminal.
 
-## Running the Algorithm
+### Using Integrated Development Environment (IDE):
+
+1. Import the project into your IDE.
+
+2. Run the tests from the IDE's testing interface.
+
+## Running the algorithm
 
 To use team balancing algorithm in your Java project, follow these steps:
 
 **1. Import the TeamBalancer class.**
 
-**2. Adjust the Algorithm Parameters.**
+**2. Adjust the algorithm parameters.**
 
 To execute the team balancing algorithm, utilize the balanceTeams method from the TeamBalancer class within your Java code.
 Modify the 'numberOfTeams' variable to specify the desired number of teams for balancing.
