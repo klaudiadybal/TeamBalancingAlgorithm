@@ -1,4 +1,4 @@
-# **Team balancer**
+# **Team Balancer**
 
 This Java program is designed to balance teams based on the skills of individual players. 
 It provides methods to find teams with the lowest overall skill and the smallest number of players.
