@@ -11,14 +11,7 @@ public class TeamBalancer {
     }
 
     Team findTeamWithTheLowestTeamSize(List<Team> teams) {
-        Team lowestTeamSize = teams.get(0);
-
-        for(Team team : teams) {
-            if(team.getIndividuals().size() < lowestTeamSize.getIndividuals().size()) {
-                lowestTeamSize = team;
-            }
-        }
-        return lowestTeamSize;
+        return Collections.min(teams, Comparator.comparingInt(team -> team.getIndividuals().size()));
     }
 
     public List<Team> balanceTeams(Map<String, Double> individuals, int numberOfTeams) {
@@ -39,13 +32,9 @@ public class TeamBalancer {
             Team lowestTeamSize = findTeamWithTheLowestTeamSize(teams);
 
             if (lowestTeamSkill.getIndividuals().size() > lowestTeamSize.getIndividuals().size()) {
-                lowestTeamSize.getIndividuals().add(individualsName);
-                Double teamSkill = lowestTeamSize.getTeamSkill();
-                lowestTeamSize.setTeamSkill(teamSkill + individuals.get(individualsName));
+                addIndividual(individuals, individualsName, lowestTeamSize);
             } else {
-                lowestTeamSkill.getIndividuals().add(individualsName);
-                Double teamSkill = lowestTeamSkill.getTeamSkill();
-                lowestTeamSkill.setTeamSkill(teamSkill + individuals.get(individualsName));
+                addIndividual(individuals, individualsName, lowestTeamSkill);
             }
         }
 
@@ -54,6 +43,11 @@ public class TeamBalancer {
         return teams;
     }
 
+    private void addIndividual(Map<String, Double> individuals, String individualsName, Team team) {
+        team.getIndividuals().add(individualsName);
+        Double teamSkill = team.getTeamSkill();
+        team.setTeamSkill(teamSkill + individuals.get(individualsName));
+    }
 
 
     List<Team> getTeams(int numberOfTeams, List<String> individualsNames) {
@@ -93,8 +87,9 @@ public class TeamBalancer {
 
         for(int i = 0; i < teams.size(); i++) {
             String individuals = teams.get(i).getIndividuals().toString();
+            String formattedAverageRate = String.format(Locale.US, "%.1f", teams.get(i).getTeamSkill() / teamSize);
             stringBuilder.append("Team no ").append(i + 1).append(" has ").append(teamSize).append(" players(").append(individuals, 1, individuals.length() - 1)
-                .append("). Average rate: ").append(teams.get(i).getTeamSkill() / teamSize).append("\n");
+                .append("). Average rate: ").append(formattedAverageRate).append("\n");
         }
 
         stringBuilder.append("Teams rate standard deviation: ").append(standardDeviation).append("\n");

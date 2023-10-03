@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Implementing complete, balancing algorithm.">
+    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Adding a method that finds the team with the smallest number of members. Changing the balancing logic.">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" afterDir="false" />
@@ -39,6 +40,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2W7lhnyqQE5HYYULpYE4v3whtuv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -47,16 +51,43 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/klaud/IdeaProjects/L33tcode&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.TeamBalancerTest">
+  <component name="RunManager" selected="Gradle.IntervievTask [test]">
+    <configuration name="IntervievTask [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="TeamBalancerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -81,7 +112,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamBalancerTest.shouldAssignCorrectIndividualsToTeams" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamBalancerTest.shouldAddIndividual" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -94,7 +125,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldAssignCorrectIndividualsToTeams&quot;" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldAddIndividual&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -105,7 +136,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamBalancerTest.shouldBalanceTeamsAppropriately" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSize" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -118,7 +149,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldBalanceTeamsAppropriately&quot;" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSize&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -129,7 +160,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="TeamBalancerTest.shouldNotFailIfNumberOfTeamsIsGreaterThanNumberOfIndividuals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TeamBalancerTest.shouldNoFailIfTeamSizesAreEqual" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -142,31 +173,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldNotFailIfNumberOfTeamsIsGreaterThanNumberOfIndividuals&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="TeamBalancerTest.shouldReturnEmptyListIfNumberOfTeamsIsGreaterThanNumberOfIndividuals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;teambalancer.TeamBalancerTest.shouldReturnEmptyListIfNumberOfTeamsIsGreaterThanNumberOfIndividuals&quot;" />
+            <option value="&quot;teambalancer.TeamBalancerTest.shouldNoFailIfTeamSizesAreEqual&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -179,11 +186,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.IntervievTask [test]" />
         <item itemvalue="Gradle.TeamBalancerTest" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldReturnEmptyListIfNumberOfTeamsIsGreaterThanNumberOfIndividuals" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldNotFailIfNumberOfTeamsIsGreaterThanNumberOfIndividuals" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldAssignCorrectIndividualsToTeams" />
-        <item itemvalue="Gradle.TeamBalancerTest.shouldBalanceTeamsAppropriately" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldAddIndividual" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldNoFailIfTeamSizesAreEqual" />
+        <item itemvalue="Gradle.TeamBalancerTest.shouldFindTeamWithTheSmallestTeamSize" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +235,47 @@
       <option name="project" value="LOCAL" />
       <updated>1696244509478</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Handling with situation when number of teams is greater than number of individuals.">
+      <option name="closed" value="true" />
+      <created>1696258181066</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696258181066</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Implementation of the method for printing teams in the console.">
+      <option name="closed" value="true" />
+      <created>1696263069139</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696263069139</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implementation of the method calculating standard deviation.">
+      <option name="closed" value="true" />
+      <created>1696267256956</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696267256956</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Method finding team with the lowest team skill method refactored. Changing logic for handling indivisible number of individuals.">
+      <option name="closed" value="true" />
+      <created>1696273634028</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1696273634028</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Adding a method that finds the team with the smallest number of members. Changing the balancing logic.">
+      <option name="closed" value="true" />
+      <created>1696280983705</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1696280983705</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -259,6 +306,22 @@
     <MESSAGE value="Implementation of division into teams of equal size." />
     <MESSAGE value="Handling situation when number of individuals is not divisible by number of teams." />
     <MESSAGE value="Implementing complete, balancing algorithm." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing complete, balancing algorithm." />
+    <MESSAGE value="Handling with situation when number of teams is greater than number of individuals." />
+    <MESSAGE value="Implementation of the method for printing teams in the console." />
+    <MESSAGE value="Implementation of the method calculating standard deviation." />
+    <MESSAGE value="Method finding team with the lowest team skill method refactored. Changing logic for handling indivisible number of individuals." />
+    <MESSAGE value="Adding a method that finds the team with the smallest number of members. Changing the balancing logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding a method that finds the team with the smallest number of members. Changing the balancing logic." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java</url>
+          <line>363</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

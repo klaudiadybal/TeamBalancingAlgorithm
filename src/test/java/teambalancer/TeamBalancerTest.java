@@ -56,6 +56,85 @@ class TeamBalancerTest {
     }
 
     @Test
+    public void shouldFindTeamWithTheSmallestTeamSize() {
+        List<Team> teams = new ArrayList<>();
+
+        Team t1 = new Team();
+        t1.setIndividuals(Arrays.asList("Robbie", "Johnny", "Juliet"));
+        teams.add(t1);
+
+        Team t2 = new Team();
+        t2.setIndividuals(Arrays.asList("Betty"));
+        teams.add(t2);
+
+        Team t3 = new Team();
+        t3.setIndividuals(Arrays.asList("Harry", "Olivia"));
+        teams.add(t3);
+
+        Team lowestTeamSize = teamBalancer.findTeamWithTheLowestTeamSize(teams);
+
+        assertThat(lowestTeamSize).isEqualTo(t2);
+        assertThat(lowestTeamSize.getIndividuals().size()).isEqualTo(1);
+
+    }
+
+    @Test
+    public void shouldNoFailIfTeamSizesAreEqual() {
+        List<Team> teams = new ArrayList<>();
+
+        Team t1 = new Team();
+        t1.setIndividuals(Arrays.asList("Robbie", "Johnny", "Juliet"));
+        teams.add(t1);
+
+        Team t2 = new Team();
+        t2.setIndividuals(Arrays.asList("Betty", "Anna", "Scarlet"));
+        teams.add(t2);
+
+        Team t3 = new Team();
+        t3.setIndividuals(Arrays.asList("Harry", "Olivia", "Tom"));
+        teams.add(t3);
+
+        Team lowestTeamSize = teamBalancer.findTeamWithTheLowestTeamSize(teams);
+
+        assertThat(lowestTeamSize).isIn(t1, t2, t3);
+        assertThat(lowestTeamSize.getIndividuals().size()).isEqualTo(3);
+
+    }
+
+    @Test
+    public void shouldAddIndividual() {
+        Team team = new Team();
+        int sizeBefore = team.getIndividuals().size();
+
+        team.getIndividuals().add("Jude");
+
+        assertThat(team.getIndividuals().size()).isEqualTo(sizeBefore + 1);
+
+    }
+
+    @Test
+    public void shouldCalculateTeamStandardDeviation() {
+        Map<String, Double> individuals = new HashMap<>();
+        individuals.put("Johnny", 3.0);
+        individuals.put("Robbie", 4.0);
+        individuals.put("Juliet", 5.0);
+        individuals.put("Scarlet", 5.0);
+        individuals.put("Jude", 10.0);
+        individuals.put("Deborah", 5.0);
+        individuals.put("Tom", 2.0);
+
+        int numberOfTeams = 4;
+
+        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
+
+        double standardDeviation = teamBalancer.getStandardDeviation(teams);
+
+        assertThat(teams.size()).isEqualTo(7);
+        assertThat(standardDeviation).isEqualTo(2.36);
+
+    }
+
+    @Test
     public void shouldReturnCorrectNumberOfTeams() {
         Map<String, Double> individuals = new HashMap<>();
         individuals.put("Jude", 6.5);
@@ -213,27 +292,6 @@ class TeamBalancerTest {
         System.setOut(System.out);
     }
 
-    @Test
-    public void shouldCalculateTeamStandardDeviation() {
-        Map<String, Double> individuals = new HashMap<>();
-        individuals.put("Johnny", 3.0);
-        individuals.put("Robbie", 4.0);
-        individuals.put("Juliet", 5.0);
-        individuals.put("Scarlet", 5.0);
-        individuals.put("Jude", 10.0);
-        individuals.put("Deborah", 5.0);
-        individuals.put("Tom", 2.0);
-
-        int numberOfTeams = 4;
-
-        List<Team> teams = teamBalancer.balanceTeams(individuals, numberOfTeams);
-
-        double standardDeviation = teamBalancer.getStandardDeviation(teams);
-
-        assertThat(teams.size()).isEqualTo(7);
-        assertThat(standardDeviation).isEqualTo(2.36);
-
-    }
 
     @Test
     public void shouldNotFailIfNumberOfTeamsEqualsZero(){
@@ -311,27 +369,6 @@ class TeamBalancerTest {
         assertThat(standardDeviation).isEqualTo(0.72);
     }
 
-    @Test
-    public void shouldFindTeamWithTheSmallestTeamSize() {
-        List<Team> teams = new ArrayList<>();
 
-        Team t1 = new Team();
-        t1.setIndividuals(Arrays.asList("Robbie", "Johnny", "Juliet"));
-        teams.add(t1);
-
-        Team t2 = new Team();
-        t2.setIndividuals(Arrays.asList("Betty"));
-        teams.add(t2);
-
-        Team t3 = new Team();
-        t3.setIndividuals(Arrays.asList("Harry", "Olivia"));
-        teams.add(t3);
-
-        Team lowestTeamSize = teamBalancer.findTeamWithTheLowestTeamSize(teams);
-
-        assertThat(lowestTeamSize).isEqualTo(t2);
-        assertThat(lowestTeamSize.getIndividuals().size()).isEqualTo(1);
-
-    }
 
 }
