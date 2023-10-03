@@ -1,4 +1,4 @@
-# **Team Balancer**
+# **Team Balancing Algorithm**
 
 This Java program is designed to balance teams based on the skills of individual players. 
 It provides methods to find teams with the lowest overall skill and the smallest number of players.
@@ -18,8 +18,9 @@ Alternatively, you can also perform these actions using an Integrated Developmen
 
 **1. Clone the repository (or unpack ZIP file):**
 
-`git clone <https://github.com/klaudiadybal/TeamBalancingAlgorithm.git>
-cd TeamBalancingAlgorithm`
+`git clone https://github.com/klaudiadybal/TeamBalancingAlgorithm.git`
+
+`cd TeamBalancingAlgorithm`
 
 **2. Open created folder in terminal, compile and run test using Gradle:**
 
