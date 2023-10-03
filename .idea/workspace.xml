@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Adding a method that finds the team with the smallest number of members. Changing the balancing logic.">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="5fcb2eb7-5171-4089-b9cc-1b73f76dbbf6" name="Changes" comment="Adding README file. Finding team with the lowest team size method optimized.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/teambalancer/TeamBalancer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/teambalancer/TeamBalancerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +24,12 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -275,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696280983705</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Adding README file. Finding team with the lowest team size method optimized.">
+      <option name="closed" value="true" />
+      <created>1696317955018</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1696317955018</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -311,7 +322,8 @@
     <MESSAGE value="Implementation of the method calculating standard deviation." />
     <MESSAGE value="Method finding team with the lowest team skill method refactored. Changing logic for handling indivisible number of individuals." />
     <MESSAGE value="Adding a method that finds the team with the smallest number of members. Changing the balancing logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding a method that finds the team with the smallest number of members. Changing the balancing logic." />
+    <MESSAGE value="Adding README file. Finding team with the lowest team size method optimized." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding README file. Finding team with the lowest team size method optimized." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
